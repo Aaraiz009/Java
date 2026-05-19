@@ -1,1 +1,82 @@
+import javax.swing.*;
 
+                String data[] = {
+                        txtId.getText(),
+                        txtName.getText(),
+                        txtDisease.getText(),
+                        txtDoctor.getText(),
+                        txtAge.getText()
+                };
+
+                model.addRow(data);
+
+                JOptionPane.showMessageDialog(this, "Patient Record Added Successfully!");
+                clearFields();
+            }
+        }
+
+        // UPDATE RECORD
+        if (e.getSource() == btnUpdate) {
+
+            int row = table.getSelectedRow();
+
+            if (row == -1) {
+                JOptionPane.showMessageDialog(this, "Please select a row to update!");
+            }
+            else {
+
+                if (validateFields()) {
+
+                    model.setValueAt(txtId.getText(), row, 0);
+                    model.setValueAt(txtName.getText(), row, 1);
+                    model.setValueAt(txtDisease.getText(), row, 2);
+                    model.setValueAt(txtDoctor.getText(), row, 3);
+                    model.setValueAt(txtAge.getText(), row, 4);
+
+                    JOptionPane.showMessageDialog(this, "Patient Record Updated Successfully!");
+                    clearFields();
+                }
+            }
+        }
+
+        // DELETE RECORD
+        if (e.getSource() == btnDelete) {
+
+            int row = table.getSelectedRow();
+
+            if (row == -1) {
+                JOptionPane.showMessageDialog(this, "Please select a row to delete!");
+            }
+            else {
+
+                model.removeRow(row);
+
+                JOptionPane.showMessageDialog(this, "Patient Record Deleted Successfully!");
+                clearFields();
+            }
+        }
+
+        // CLEAR FORM
+        if (e.getSource() == btnClear) {
+            clearFields();
+        }
+    }
+
+    // ================= CLEAR METHOD =================
+    public void clearFields() {
+
+        txtId.setText("");
+        txtName.setText("");
+        txtDisease.setText("");
+        txtDoctor.setText("");
+        txtAge.setText("");
+
+        table.clearSelection();
+    }
+
+    // ================= MAIN METHOD =================
+    public static void main(String[] args) {
+
+        new HospitalCRUD();
+    }
+}
